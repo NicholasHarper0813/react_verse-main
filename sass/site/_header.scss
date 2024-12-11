@@ -1,0 +1,48 @@
+/*--------------------------------------------------------------
+    Header
+--------------------------------------------------------------*/
+.site-header {
+	// margin: 20px auto 0;
+	padding-bottom: 20px;
+	display: flex;
+	flex-flow: row wrap;
+	align-items: flex-start;
+
+
+		margin-top: 30px;
+		margin-bottom: 20px;
+
+}
+
+.site-branding {
+	// flex: 1 100%;
+	padding-top: 20xp;
+	@include breakpoint( '>660px' ) {
+	// 	flex: 1 $size__site-sidebar;
+	// 	-ms-flex: 1 $size__site-sidebar-fallback;
+	// 	max-width: $size__site-sidebar;
+		margin-right: $size__site-gutter;
+		margin-left: -1px; // Safari hack
+	// 	text-align: center;
+	}
+}
+
+.main-navigation {
+	flex: 1 100%;
+
+	@include breakpoint( '>660px' ) {
+		flex: 1 $size__site-content;
+		max-width: $size__site-content;
+		margin-top: 10px;
+	}
+}
+
+.site-title a,
+.site-logo-link {
+	&:hover,
+	&:active,
+	&:focus {
+		outline: none;
+	}
+}
+

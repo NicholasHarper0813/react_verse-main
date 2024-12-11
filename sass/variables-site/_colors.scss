@@ -1,0 +1,41 @@
+// Base Colors
+$dark-blue: #6A7379;
+$blue: #0585eb;
+$white: #fefefe;
+$black: #000000;
+$grey: #dddfde;
+$dark-grey: #7C8F90;
+
+// In-context colors
+
+$color__background-body: $white;
+$color__background-screen: $white;
+$color__background-hr: rgba( $black, 0.15 );
+$color__background-button: $black;
+$color__background-button-primary: $blue;
+$color__background-pre: mix( $blue, $white, 10% );
+$color__background-ins: mix( $black, $white, 20% );
+
+$color__background-image: mix( $grey, $white, 35% );
+
+$color__background-button-focus: mix( $grey, $white, 85% );
+
+$color__text-main: $black;
+
+$color__text-screen: $black;
+$color__text-button: $white;
+$color__text-label: rgba( $black, 0.75 );
+$color__text-input: $black;
+$color__text-input-focus: mix( $black, $black, 60% );
+
+$color__link: inherit;
+$color__link-nav: $black;
+$color__link-border: $dark-grey;
+$color__link-visited: inherit;
+$color__link-hover: inherit;
+$color__link-hover-background: mix( $grey, $white, 35% );
+
+$color__border: rgba( $black, 0.25 );
+$color__border-input: rgba( $black, 0.25 );
+$color__border-input-focus: rgba( $black, 0.30 );
+$color__border-abbr: $black;

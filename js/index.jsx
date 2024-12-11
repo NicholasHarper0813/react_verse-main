@@ -1,9 +1,5 @@
-/*global ReactVerseSettings, ReactVerseData, ReactVerseMenu, jQuery */
-// Load in the babel (es6) polyfill, and fetch polyfill
 import 'babel-polyfill';
 import 'whatwg-fetch';
-
-// React
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
@@ -13,11 +9,9 @@ import { useScroll } from 'react-router-scroll';
 import { bindActionCreators } from 'redux';
 import { escapeRegExp } from 'lodash';
 
-// Load the CSS
 require( '../sass/style.scss' );
 require( '../inc/bootstrap.scss' );
 
-// Internal
 import Navigation from './components/navigation';
 import Index from './components/posts';
 import SinglePost from './components/post';
@@ -31,33 +25,30 @@ import NotFound from './components/not-found';
 import { createReduxStore } from './state';
 import { setMenu } from 'wordpress-query-menu/lib/state';
 import { setPost, setPosts } from './utils/initial-actions';
-
-// Accessibility!
 import { keyboardFocusReset, skipLink, toggleFocus } from './utils/a11y';
 
-// Now the work starts.
 const store = createReduxStore();
 const history = syncHistoryWithStore( browserHistory, store );
 const path = ReactVerseSettings.URL.path || '/';
 
-function renderApp() {
+function renderApp() 
+{
 	let blogURL, frontPageRoute;
-	if ( ReactVerseSettings.frontPage.page ) {
+	if ( ReactVerseSettings.frontPage.page ) 
+	{
 		blogURL = path + 'page/' + ReactVerseSettings.frontPage.blog + '/';
 		frontPageRoute = <Route path={ path } slug={ ReactVerseSettings.frontPage.page } component={ SinglePage } />;
-	} else {
+	} 
+	else {
 		blogURL = path;
 		frontPageRoute = null;
 	}
 
 	const routerMiddleware = applyRouterMiddleware( useScroll( shouldUpdateScroll ), keyboardFocusReset( 'main' ) );
-
-	// Add the event Jetpack listens for to initialize various JS features on posts.
 	const emitJetpackEvent = () => {
 		jQuery( document.body ).trigger( 'post-load' );
 	}
 
-	// Routes
 	const routes = (
 		<Router history={ history } render={ routerMiddleware } onUpdate={ emitJetpackEvent }>
 			<Route path={ blogURL } component={ Index } />
@@ -92,7 +83,8 @@ function renderApp() {
 		document.getElementById( 'main' )
 	);
 
-	if ( ReactVerseMenu.enabled ) {
+	if ( ReactVerseMenu.enabled ) 
+	{
 		render(
 			(
 				<Provider store={ store }>
@@ -101,13 +93,13 @@ function renderApp() {
 			),
 			document.getElementById( 'site-navigation' )
 		);
-	} else {
-		// Run this to initialize the focus JS for PHP-generated menus
+	} 
+	else 
+	{
 		initNoApiMenuFocus();
 	}
 }
 
-// Callback for `useScroll`, which skips the auto-scrolling on skiplinks
 function shouldUpdateScroll( prevRouterProps, { location } ) {
 	if ( location.hash ) {
 		return false;
@@ -115,7 +107,6 @@ function shouldUpdateScroll( prevRouterProps, { location } ) {
 	return true;
 }
 
-// Initialize keyboard functionality with JS for non-react-build Menus (if the API doesn't exist)
 function initNoApiMenuFocus() {
 	const container = document.getElementById( 'site-navigation' );
 	if ( ! container ) {
@@ -123,13 +114,11 @@ function initNoApiMenuFocus() {
 	}
 
 	const menu = container.getElementsByTagName( 'div' )[1];
-	// No menu, no need to run the rest.
 	if ( ! menu ) {
 		return;
 	}
 
 	const links = menu.getElementsByTagName( 'a' );
-	// Each time a menu link is focused or blurred, toggle focus.
 	let i, len;
 	for ( i = 0, len = links.length; i < len; i++ ) {
 		links[i].addEventListener( 'focus', toggleFocus, true );
@@ -150,9 +139,7 @@ function initNoApiMenuFocus() {
 	};
 }
 
-// Set up link capture on all links in the app context.
 function handleLinkClick() {
-	// This regex matches any string with the wp site's URL in it, but we want to trim the trailing slash
 	let regexBaseUrl = ReactVerseSettings.URL.base;
 	if ( '/' === regexBaseUrl[ regexBaseUrl.length - 1 ] ) {
 		regexBaseUrl = regexBaseUrl.slice( 0, regexBaseUrl.length - 1 );
@@ -160,12 +147,10 @@ function handleLinkClick() {
 	const escapedSiteURL = new RegExp( escapeRegExp( regexBaseUrl ).replace( /\//g, '\\\/' ) );
 
 	jQuery( '#page' ).on( 'click', 'a[rel!=external][target!=_blank]', ( event ) => {
-		// Don't capture clicks offsite
 		if ( ! escapedSiteURL.test( event.currentTarget.href ) ) {
 			return;
 		}
 
-		// Custom functionality for attachment pages
 		const linkRel = jQuery( event.currentTarget ).attr( 'rel' );
 		if ( linkRel && linkRel.search( /attachment/ ) !== -1 ) {
 			event.preventDefault();
@@ -175,7 +160,6 @@ function handleLinkClick() {
 			return;
 		}
 
-		// Don't capture clicks to wp-admin, or the RSS feed
 		if ( /wp-(admin|login)/.test( event.currentTarget.href ) || /\/feed\/$/.test( event.currentTarget.href ) ) {
 			return;
 		}
@@ -191,7 +175,6 @@ function handleLinkClick() {
 	} );
 }
 
-// If we have pre-loaded data, we know we're viewing the list of posts, and should pre-load it.
 function renderPreloadData() {
 	const actions = bindActionCreators( { setMenu, setPost, setPosts }, store.dispatch );
 	actions.setMenu( 'primary', ReactVerseMenu.data );

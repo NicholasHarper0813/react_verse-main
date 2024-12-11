@@ -1,0 +1,60 @@
+
+/*--------------------------------------------------------------
+   Lists of posts
+--------------------------------------------------------------*/
+.entry {
+	display: flex;
+	flex-flow: row wrap;
+	align-items: flex-start;
+	margin-bottom: 40px;
+
+	background-color: white;
+	@include breakpoint( '>660px' ) {
+		padding: 40px;
+	}
+	.col-md-4 {
+		padding: 0;
+	}
+}
+
+.entry-title {
+	flex: 1 100%;
+	max-width: 100%;
+	order: 1;
+
+	// @include breakpoint( '>660px' ) {
+	// 	@include sidebar-padding;
+	// 	order: 1;
+	// }
+}
+
+.entry-meta {
+	// flex: 1 100%;
+	// width: 100%;
+	// order: 3;
+
+	// @include breakpoint( '>660px' ) {
+	// 	flex: 1 $size__site-sidebar;
+	// 	-ms-flex: 1 $size__site-sidebar-fallback;
+	// 	order: 2;
+	// 	// width: $size__site-sidebar;
+	// 	margin-top: 8px;
+	// 	margin-right: $size__site-gutter;
+	// 	margin-bottom: 20px;
+	// }
+}
+
+.entry-meta-label {
+	margin-bottom: 5px;
+}
+
+.entry-content {
+	flex: 1 $size__site-content;
+	order: 2;
+	overflow: hidden;
+
+	@include breakpoint( '>660px' ) {
+		order: 3;
+		// max-width: $size__site-content;
+	}
+}

@@ -1,32 +1,31 @@
-/* global ReactVerseSettings, wp */
-// External dependencies
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-
 import { isSubmittingCommentOnPost } from 'wordpress-query-comments/lib/selectors';
 import { submitComment } from 'wordpress-query-comments/lib/state';
 
 const CommentForm = React.createClass( {
-
-	getInitialState() {
+	getInitialState() 
+	{
 		return {
 			message: false,
 			error: false,
 		};
 	},
 
-	componentDidUpdate() {
-		if ( ! this.state.message ) {
+	componentDidUpdate() 
+	{
+		if ( ! this.state.message ) 
+		{
 			return null;
 		}
 
-		// Speak the message status for screen readers
 		const messagePrefix = this.state.error ? 'Error: ' : 'Success: '
 		wp.a11y.speak( messagePrefix + this.state.message, 'assertive' );
 	},
 
-	onSubmit( event ) {
+	onSubmit( event ) 
+	{
 		event.preventDefault();
 		event.persist(); // We need this for the callback after a comment is posted.
 		let keys = [ 'author', 'author_id', 'email', 'url', 'comment', 'comment_post_ID', 'comment_parent' ];
@@ -45,25 +44,27 @@ const CommentForm = React.createClass( {
 		values.content = rawValues.comment;
 		values.post = rawValues.comment_post_ID;
 
-		// Remove the `author` param if the user is not logged in
-		if ( ! parseInt( rawValues.author_id, 10 ) ) {
+		if ( ! parseInt( rawValues.author_id, 10 ) ) 
+		{
 			delete values.author;
 		}
 
 		const submission = this.props.submitComment( values );
 		submission.then( ( response ) => {
-			// No idea what happened.
-			if ( ! response ) {
+			if ( ! response ) 
+			{
 				return;
 			}
 
-			if ( response.code ) {
+			if ( response.code ) 
+			{
 				this.setState( {
 					message: this.getErrorMessage( response.code ),
 					error: true
 				} );
-			} else {
-				// Clear the comment form on successful posts
+			} 
+			else 
+			{
 				event.target.comment.value = '';
 				this.setState( {
 					message: ( 'hold' === response.status ) ? 'Comment submitted, pending approval.' : 'Comment posted.',
@@ -77,8 +78,10 @@ const CommentForm = React.createClass( {
 		} );
 	},
 
-	getErrorMessage( code ) {
-		switch ( code ) {
+	getErrorMessage( code ) 
+	{
+		switch ( code ) 
+		{
 			case 'comment_duplicate':
 				return 'Duplicate comment detected; it looks as though you’ve already said that!';
 			case 'comment_flood':
@@ -88,7 +91,8 @@ const CommentForm = React.createClass( {
 		}
 	},
 
-	renderAnonFields() {
+	renderAnonFields() 
+	{
 		const fields = [];
 		fields.push(
 			<p className="comment-form-notes" key="0">
@@ -120,7 +124,8 @@ const CommentForm = React.createClass( {
 		return fields;
 	},
 
-	renderLoggedInNotice() {
+	renderLoggedInNotice() 
+	{
 		return (
 			<p className="comment-form-notes">
 				<span id="email-notes">Logged in as { ReactVerseSettings.userDisplay }.</span>
@@ -128,8 +133,10 @@ const CommentForm = React.createClass( {
 		);
 	},
 
-	renderResponseMessage() {
-		if ( ! this.state.message || ! this.state.error ) {
+	renderResponseMessage() 
+	{
+		if ( ! this.state.message || ! this.state.error )
+		{
 			return null;
 		}
 
@@ -140,7 +147,8 @@ const CommentForm = React.createClass( {
 		);
 	},
 
-	render() {
+	render() 
+	{
 		return (
 			<form onSubmit={ this.onSubmit }>
 				{ ReactVerseSettings.user === 0 ? this.renderAnonFields() : this.renderLoggedInNotice() }

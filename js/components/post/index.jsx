@@ -1,17 +1,12 @@
-/* global ReactVerseSettings */
 import React from 'react';
 import { connect } from 'react-redux';
+import { getPostIdFromSlug, isRequestingPost, getPost } from 'wordpress-query-posts/lib/selectors';
 import classNames from 'classnames';
+import ContentMixin from '../../utils/content-mixin';
 import DocumentMeta from 'react-document-meta';
 import BodyClass from 'react-body-class';
 import he from 'he';
-
-// Internal dependencies
 import QueryPosts from 'wordpress-query-posts';
-import { getPostIdFromSlug, isRequestingPost, getPost } from 'wordpress-query-posts/lib/selectors';
-import ContentMixin from '../../utils/content-mixin';
-
-// Components
 import PostMeta from './meta';
 import Media from './image';
 import Comments from '../comments';
@@ -21,13 +16,16 @@ import PostPreview from './preview';
 const SinglePost = React.createClass( {
 	mixins: [ ContentMixin ],
 
-	renderArticle() {
+	renderArticle() 
+	{
 		const post = this.props.post;
-		if ( ! post ) {
+		if ( ! post ) 
+		{
 			return null;
 		}
 
-		const meta = {
+		const meta = 
+		{
 			title: post.title.rendered + ' – ' + ReactVerseSettings.meta.title,
 			description: post.excerpt.rendered,
 			canonical: post.link,
@@ -58,7 +56,8 @@ const SinglePost = React.createClass( {
 
 	renderComments() {
 		const post = this.props.post;
-		if ( ! post ) {
+		if ( ! post ) 
+		{
 			return null;
 		}
 
@@ -71,8 +70,10 @@ const SinglePost = React.createClass( {
 		)
 	},
 
-	render() {
-		if ( !! this.props.previewId ) {
+	render() 
+	{
+		if ( !! this.props.previewId ) 
+		{
 			return (
 				<PostPreview id={ this.props.previewId } />
 			);
@@ -97,10 +98,10 @@ export default connect( ( state, ownProps ) => {
 	const postId = getPostIdFromSlug( state, slug );
 	const requesting = isRequestingPost( state, slug );
 	const post = getPost( state, parseInt( postId ) );
-
 	const previewId = ownProps.location.query.preview_id;
 
-	return {
+	return 
+	{
 		previewId,
 		slug,
 		postId,

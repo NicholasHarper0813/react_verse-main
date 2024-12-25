@@ -1,20 +1,19 @@
-// External dependencies
 import React from 'react';
-import { connect } from 'react-redux';
-
-// Internal dependencies
 import ContentMixin from '../../utils/content-mixin';
+import { connect } from 'react-redux';
 import { getComment } from 'wordpress-query-comments/lib/selectors';
 
 const Comment = React.createClass( {
 	mixins: [ ContentMixin ],
 
-	render() {
+	render() 
+	{
 		const comment = this.props.comment;
 		const classes = 'comment'; // byuser comment-author-melchoyce even thread-even depth-1
 
 		let replyParentString = null;
-		if ( this.props.parent ) {
+		if ( this.props.parent ) 
+		{
 			replyParentString = (
 				<span>In reply to { this.props.parent.author_name }&nbsp;&bull;&nbsp;</span>
 			);

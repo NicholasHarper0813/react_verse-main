@@ -1,21 +1,19 @@
-// External dependencies
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import isEqual from 'lodash/isEqual';
-
-// Redux dependencies
 import QueryPosts from 'wordpress-query-posts';
 import { isRequestingPostsForQuery, getPostsForQuery } from 'wordpress-query-posts/lib/selectors';
-
-// Components
 import PostList from './list';
 
-class StickyPostsList extends Component {
-	shouldComponentUpdate( nextProps ) {
+class StickyPostsList extends Component 
+{
+	shouldComponentUpdate( nextProps ) 
+	{
 		return ! isEqual( nextProps.posts, this.props.posts );
 	}
 
-	render() {
+	render() 
+	{
 		const posts = this.props.posts;
 
 		return (
@@ -36,7 +34,8 @@ export default connect( ( state ) => {
 	const posts = getPostsForQuery( state, query ) || [];
 	const requesting = isRequestingPostsForQuery( state, query );
 
-	return {
+	return 
+	{
 		query,
 		posts,
 		requesting,

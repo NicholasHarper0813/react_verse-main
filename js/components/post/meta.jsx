@@ -1,10 +1,11 @@
-// External dependencies
 import React from 'react';
 import { Link } from 'react-router';
 import find from 'lodash/find';
 
-function getTaxonomy( post, taxonomy ) {
-	if ( post === {} ) {
+function getTaxonomy( post, taxonomy ) 
+{
+	if ( post === {} ) 
+	{
 		return [];
 	}
 	const terms = find( post._embedded['wp:term'], function( item ) {
@@ -18,23 +19,29 @@ let PostMeta = React.createClass( {
 		let categories = getTaxonomy( this.props.post, 'category' );
 		let tags = getTaxonomy( this.props.post, 'post_tag' );
 
-		if ( 'undefined' !== typeof categories ) {
+		if ( 'undefined' !== typeof categories ) 
+		{
 			categories = categories.map( function( item, i ) {
 				return (
 					<Link key={ i } to={ item.link }>{ item.name }</Link>
 				);
 			} );
-		} else {
+		} 
+		else 
+		{
 			categories = null;
 		}
 
-		if ( 'undefined' !== typeof tags ) {
+		if ( 'undefined' !== typeof tags ) 
+		{
 			tags = tags.map( function( item, i ) {
 				return (
 					<Link key={ i } to={ item.link }>{ item.name }</Link>
 				);
 			} );
-		} else {
+		} 
+		else 
+		{
 			tags = null;
 		}
 

@@ -1,24 +1,21 @@
-/*global ReactVerseSettings */
 import React from 'react';
+import { isRequestingPostsForQuery, getPostsForQuery, getTotalPagesForQuery } from 'wordpress-query-posts/lib/selectors';
 import { connect } from 'react-redux';
 import DocumentMeta from 'react-document-meta';
 import BodyClass from 'react-body-class';
 import moment from 'moment';
 import he from 'he';
-
-// Internal dependencies
 import QueryPosts from 'wordpress-query-posts';
-import { isRequestingPostsForQuery, getPostsForQuery, getTotalPagesForQuery } from 'wordpress-query-posts/lib/selectors';
-
-// Components
 import PostList from '../posts/list';
 import Pagination from '../pagination/archive';
 import Placeholder from '../placeholder';
 
 const DateArchive = React.createClass( {
-	render() {
+	render() 
+	{
 		const { query, loading, path, page, totalPages, dateString, posts } = this.props;
-		const meta = {
+		const meta = 
+		{
 			title: dateString + ' – ' + he.decode( ReactVerseSettings.meta.title ),
 		};
 
@@ -57,17 +54,22 @@ export default connect( ( state, ownProps ) => {
 	const { day, month, year } = ownProps.params;
 	let date, dateString, query = {};
 	query.page = ownProps.params.paged || 1;
-	if ( day ) {
+	if ( day ) 
+	{
 		date = moment( `${ year } ${ month } ${ day }`, 'YYYY MM DD' );
 		dateString = date.format( 'MMMM Do YYYY' );
 		query.after = date.format();
 		query.before = date.add( 1, 'day' ).format();
-	} else if ( month ) {
+	} 
+	else if ( month ) 
+	{
 		date = moment( `${ year } ${ month }`, 'YYYY MM' );
 		dateString = date.format( 'MMMM YYYY' );
 		query.after = date.format();
 		query.before = date.add( 1, 'month' ).format();
-	} else {
+	} 
+	else 
+	{
 		date = moment( `${ year }`, 'YYYY' );
 		dateString = date.format( 'YYYY' );
 		query.after = date.format();
@@ -80,7 +82,8 @@ export default connect( ( state, ownProps ) => {
 	const posts = getPostsForQuery( state, query ) || [];
 	const requesting = isRequestingPostsForQuery( state, query );
 
-	return {
+	return 
+	{
 		path,
 		query,
 		posts,

@@ -1,38 +1,36 @@
-/*--------------------------------------------------------------
-    Comments
---------------------------------------------------------------*/
-
-.comments-area {
+.comments-area 
+{
 	margin: 0 auto;
 	margin-bottom: 75px;
-
-	// @include breakpoint( '>660px' ) {
-	// 	@include sidebar-margin;
-	// }
 }
 
 .comments-title,
 .comment-list,
-.comment-respond {
+.comment-respond 
+{
 	margin-bottom: 50px;
 }
 
-.comment-list {
+.comment-list 
+{
 	margin: 0;
 	padding: 0;
 	list-style: none;
 
-	article {
+	article 
+	{
 		margin-bottom: 30px;
 	}
 }
 
-.comment-meta {
+.comment-meta 
+{
 	margin-bottom: 15px;
 	text-align: center;
 }
 
-.comment-avatar img {
+.comment-avatar img 
+{
 	box-sizing: content-box;
 	margin: 0 0 20px;
 	padding: 7px;
@@ -42,38 +40,46 @@
 	border: 1px solid $color__border;
 }
 
-.comment-author {
+.comment-author 
+{
 	margin-bottom: 10px;
 	font-weight: $font__weight-bold;
 }
 
 .comment-status,
-.comment-form-notes {
+.comment-form-notes 
+{
 	font-style: italic;
 	@include font-size( $font__size-meta );
 }
 
-@include breakpoint( '>660px' ) {
-	.comment-form-required {
+@include breakpoint( '>660px' ) 
+{
+	.comment-form-required 
+	{
 		display: flex;
 		flex-flow: row wrap;
 		align-items: flex-start;
 
-		& > div {
+		& > div 
+		{
 			flex: 1;
 		}
 
-		.comment-form-author {
+		.comment-form-author 
+		{
 			margin-right: 20px;
 		}
 	}
 }
 
-.comment-error {
+.comment-error 
+{
 	line-height: 1.4;
 }
 
-.comment-form-field {
+.comment-form-field 
+{
 	display: flex;
 	flex-flow: row wrap;
 	align-items: flex-start;
@@ -82,31 +88,38 @@
 	border: 1px solid $color__border-input;
 	color: $color__text-label;
 
-	label {
+	label 
+	{
 		flex: 0 auto;
 		padding: 15px;
 	}
 
-	input {
+	input 
+	{
 		padding-left: 0;
 	}
 
-	&.comment-form-comment {
-		label, textarea {
+	&.comment-form-comment 
+	{
+		label, textarea 
+		{
 			flex: 1 100%;
 		}
 
-		textarea {
+		textarea 
+		{
 			min-height: 140px;
 			padding: 0 15px 15px;
 		}
 	}
 }
 
-.comment-form-submit {
+.comment-form-submit 
+{
 	text-align: right;
 
-	input[type="submit"] {
+	input[type="submit"] 
+	{
 		background-color: $color__background-button-primary;
 	}
 

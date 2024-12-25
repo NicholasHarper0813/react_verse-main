@@ -1,7 +1,4 @@
-// External dependencies
 import React from 'react';
-
-// Internal dependencies
 import Post from './single';
 import Placeholder from '../placeholder';
 
@@ -13,9 +10,10 @@ const PostList = React.createClass( {
 		placeholderImage: React.PropTypes.object
 	},
 
-
-	getDefaultProps() {
-		return {
+	getDefaultProps() 
+	{
+		return 
+		{
 			shouldShowEmpty: true,
 			error: 'It seems we can’t find what you’re looking for. Perhaps searching can help.',
 		};
@@ -25,27 +23,32 @@ const PostList = React.createClass( {
 
 	},
 
-	renderPosts() {
-
+	renderPosts() 
+	{
 		return this.props.posts.map( ( post, i ) => {
 			return <Post key={ 'post-' + i } { ...post } placeholderImage={this.props.placeholderImage}/>
 		} );
 	},
 
-	renderEmpty() {
-		if ( ! this.props.shouldShowEmpty ) {
+	renderEmpty() 
+	{
+		if ( ! this.props.shouldShowEmpty ) 
+		{
 			return null;
 		}
 
-		if(this.props.loading) {
+		if(this.props.loading) 
+		{
 			return (
 				<Placeholder type="posts" />
 			)
 		}
 	},
 
-	render() {
-		if ( ! this.props.posts ) {
+	render() 
+	{
+		if ( ! this.props.posts ) 
+		{
 			return null;
 		}
 
@@ -56,7 +59,6 @@ const PostList = React.createClass( {
 					this.renderPosts() :
 					this.renderEmpty()
 				}
-
 			</div>
 		);
 	}

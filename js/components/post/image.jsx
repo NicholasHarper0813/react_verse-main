@@ -1,17 +1,19 @@
-// External dependencies
 import React from 'react';
 
 let Media = React.createClass( {
-	propTypes: {
+	propTypes: 
+	{
 		media: React.PropTypes.object.isRequired,
 		parentClass: React.PropTypes.string,
 	},
 
-	render: function() {
+	render: function() 
+	{
 		const media = this.props.media;
 
 		let mediaElement;
-		switch ( media.media_type ) {
+		switch ( media.media_type ) 
+		{
 			case 'image':
 				mediaElement = (
 					<img src={ media.source_url } alt={ media.alt_text } />

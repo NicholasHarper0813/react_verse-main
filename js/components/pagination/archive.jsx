@@ -1,10 +1,11 @@
-// External dependencies
 import React from 'react';
 import { Link } from 'react-router';
 
 let Pagination = React.createClass({
-	render() {
-		if (this.props.isFirstPage && this.props.isLastPage) {
+	render() 
+	{
+		if (this.props.isFirstPage && this.props.isLastPage) 
+		{
 			return null;
 		}
 
@@ -13,10 +14,14 @@ let Pagination = React.createClass({
 		prev = parseInt( this.props.current ) - 1;
 
 		var links = [];
-		for (var i = 1; i <= this.props.totalPages; i++) {
-			if (this.props.current === i) {
+		for (var i = 1; i <= this.props.totalPages; i++) 
+		{
+			if (this.props.current === i) 
+			{
 				links.push(<Link className="active" key={i} to={`${this.props.path}p/${i}`}>{i}</Link>);
-			} else {
+			} 
+			else 
+			{
 				links.push(<Link key={i} to={`${this.props.path}p/${i}`}>{i}</Link>);
 			}
 		}

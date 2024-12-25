@@ -1,24 +1,25 @@
-/*global ReactVerseSettings */
-// External dependencies
 import React from 'react';
-import { connect } from 'react-redux';
 import classNames from 'classnames';
+import { connect } from 'react-redux';
 import { getMenu } from 'wordpress-query-menu/lib/selectors';
-
-// Internal dependencies
 import { toggleFocus } from '../../utils/a11y';
 
-const isItemSelected = function( item ) {
+const isItemSelected = function( item ) 
+{
 	let re;
-	if ( location.pathname !== '/' ) {
+	if ( location.pathname !== '/' ) 
+	{
 		re = new RegExp( location.pathname + '$' );
-	} else {
+	} 
+	else 
+	{
 		re = new RegExp( location.hostname + '/$' );
 	}
 	return ( location.pathname === item.url ) || re.test( item.url );
 };
 
-const blur = function( event ) {
+const blur = function( event ) 
+{
 	event.target.blur();
 };
 
@@ -55,20 +56,25 @@ const MenuItem = ( { item, onClick, isSelected = false } ) => {
 }
 
 const Navigation = React.createClass( {
-	getInitialState() {
-		return {
+	getInitialState() 
+	{
+		return 
+		{
 			isMenuOpen: false,
 			selected: this.props.currentPage,
 		}
 	},
 
-	toggleMenu( event ) {
+	toggleMenu( event ) 
+	{
 		event.preventDefault();
 		this.setState( { isMenuOpen: ! this.state.isMenuOpen } );
 	},
 
-	render() {
-		if ( this.props.menu.length < 1 ) {
+	render() 
+	{
+		if ( this.props.menu.length < 1 ) 
+		{
 			return null;
 		}
 
@@ -102,7 +108,8 @@ const Navigation = React.createClass( {
 export default connect( ( state ) => {
 	const path = ReactVerseSettings.URL.path || '/';
 	const menu = getMenu( state, 'primary' );
-	return {
+	return 
+	{
 		currentPage: state.routing.locationBeforeTransitions.pathname || path,
 		menu: menu || [],
 	};

@@ -1,17 +1,11 @@
-/*global ReactVerseSettings */
-// External dependencies
 import React from 'react';
 import { connect } from 'react-redux';
 import DocumentMeta from 'react-document-meta';
 import BodyClass from 'react-body-class';
 import he from 'he';
-
-// Internal dependencies
 import QueryPosts from 'wordpress-query-posts';
 import { isRequestingPostsForQuery, getPostsForQuery, getTotalPagesForQuery } from 'wordpress-query-posts/lib/selectors';
 import * as customEndpoints from '../../utils/custom-api-endpoints';
-
-// Components
 import PostList from './list';
 import StickyPostsList from './sticky';
 import PostPreview from '../post/preview';
@@ -20,8 +14,10 @@ import Placeholder from '../placeholder';
 import NotFound from '../not-found';
 
 const Index = React.createClass( {
-	getInitialState() {
-		return {
+	getInitialState() 
+	{
+		return 
+		{
 			placeholderImage: {},
 			posts: [],
 			page: 1,
@@ -32,27 +28,24 @@ const Index = React.createClass( {
 		}
 	},
 
-	componentDidMount() {
-
-		// customEndpoints.fetchCustomizerOptions('placeholder_image_url')
-		// 	.then(data => {
-		// 		this.setState( { placeholderImage: data } );
-		// 	});
-
-		if ( window.scrollY == 0 || ReactVerseSettings.infiniteScroll.infinite_scroll == '0') {
+	componentDidMount() 
+	{
+		if ( window.scrollY == 0 || ReactVerseSettings.infiniteScroll.infinite_scroll == '0') 
+		{
 			this.fetchPosts();
 			this.setState( { initFetch: false } );
 		}
 
-
-		if (ReactVerseSettings.infiniteScroll.infinite_scroll == '1') {
+		if (ReactVerseSettings.infiniteScroll.infinite_scroll == '1') 
+		{
 
 			this.activateInfinityScroll()
 		}
 
 	},
 
-	bottomVisible() {
+	bottomVisible() 
+	{
 		const scrollY = window.scrollY
 		const visible = document.documentElement.clientHeight
 		const pageHeight = document.documentElement.scrollHeight
@@ -61,45 +54,34 @@ const Index = React.createClass( {
 
 	},
 
-	activateInfinityScroll() {
-
+	activateInfinityScroll() 
+	{
 		window.addEventListener('scroll', () => {
-			if (this.bottomVisible() && this.state.fetchOnce) {
-
+			if (this.bottomVisible() && this.state.fetchOnce) 
+			{
 				this.fetchPosts();
-
 			}
-
 		})
 	},
 
-	fetchPosts() {
-
+	fetchPosts() 
+	{
 		this.setState({ fetchOnce: false })
-
-
 		fetch(SiteSettings.endpoint + 'wp-json/wp/v2/posts?sticky=false&page=' + this.state.page + '&_embed=true')
 			.then(response => {
-
 				if (response.status === 400) return []
-
 				return response.json()
 			})
 			.then(data => {
-
-				if (data.length == 0) {
-
+				if (data.length == 0) 
+				{
 					this.setState({ fetchOnce: false });
 					return;
 				}
 
-
 				let postArray = this.state.posts;
-
 				data.forEach(function (item) {
-
 					postArray.push(item);
-
 				});
 
 				this.setState({ posts: postArray });
@@ -109,10 +91,12 @@ const Index = React.createClass( {
 
 	},
 
-	renderPostList(type) {
-		if (type == 'paged') {
-
-			if ( this.props.posts.length == 0 && !this.props.requesting) {
+	renderPostList(type) 
+	{
+		if (type == 'paged') 
+		{
+			if ( this.props.posts.length == 0 && !this.props.requesting) 
+			{
 				return <NotFound />
 			}
 
@@ -138,9 +122,10 @@ const Index = React.createClass( {
 
 	},
 
-	render() {
-
-		if (!!this.props.previewId) {
+	render() 
+	{
+		if (!!this.props.previewId) 
+		{
 			return (
 				<PostPreview id={this.props.previewId} />
 			);
@@ -153,14 +138,14 @@ const Index = React.createClass( {
 			canonical: ReactVerseSettings.URL.base,
 		};
 
-
 		return (
 			<div className="site-content">
 				<DocumentMeta { ...meta } />
 				<BodyClass classes={['home', 'blog']} />
 				<StickyPostsList />
 				<QueryPosts query={this.props.query} />
-				{this.state.posts.length === 0 ?
+				{
+					this.state.posts.length === 0 ?
 					<Placeholder type="posts" /> :
 
 					ReactVerseSettings.infiniteScroll.infinite_scroll == "0" ?
@@ -178,7 +163,8 @@ export default connect((state, ownProps) => {
 	query.page = ownProps.params.paged || 1;
 
 	let path = ReactVerseSettings.URL.path || '/';
-	if (ReactVerseSettings.frontPage.page) {
+	if (ReactVerseSettings.frontPage.page) 
+	{
 		path += 'page/' + ReactVerseSettings.frontPage.blog + '/';
 	}
 
@@ -186,7 +172,8 @@ export default connect((state, ownProps) => {
 	const requesting = isRequestingPostsForQuery(state, query);
 	const previewId = ownProps.location.query.p || ownProps.location.query.page_id;
 
-	return {
+	return 
+	{
 		previewId,
 		path,
 		page: parseInt(query.page),

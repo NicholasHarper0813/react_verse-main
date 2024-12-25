@@ -1,9 +1,9 @@
-// External dependencies
 import React from 'react';
 const noop = () => {};
 
 let Pagination = React.createClass( {
-	propTypes: {
+	propTypes: 
+	{
 		start: React.PropTypes.number,
 		current: React.PropTypes.number,
 		end: React.PropTypes.number,
@@ -11,7 +11,8 @@ let Pagination = React.createClass( {
 		onPreviousPage: React.PropTypes.func,
 	},
 
-	getDefaultProps: function() {
+	getDefaultProps: function() 
+	{
 		return {
 			start: 1,
 			current: 1,
@@ -20,7 +21,8 @@ let Pagination = React.createClass( {
 		};
 	},
 
-	render: function() {
+	render: function() 
+	{
 		let next = this.props.current + 1;
 		let prev = this.props.current - 1;
 

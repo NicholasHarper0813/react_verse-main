@@ -1,25 +1,12 @@
-<?php
-/**
- * ReactVerse Theme Customizer.
- *
- * @package ReactVerse
- */
-/**
- * Register customizer settings.
- *
- * @param WP_Customize_Manager $wp_customize Customize manager.
- */
-function reactverse_customize_register( WP_Customize_Manager $wp_customize ) {
+<?php 
+function reactverse_customize_register( WP_Customize_Manager $wp_customize ) 
+{
 	$wp_customize->get_setting( 'blogname' )->transport = 'postMessage';
 	add_filter( 'wp_get_nav_menu_items', '_reactverse_filter_wp_api_nav_menu_items_workaround', 20  );
 }
 add_action( 'customize_register', 'reactverse_customize_register' );
-/**
- * Register gradient customizer settings.
- *
- * @param WP_Customize_Manager $wp_customize Customize manager.
- */
-function reactverse_gradient_title ( WP_Customize_Manager $wp_customize ) {
+function reactverse_gradient_title ( WP_Customize_Manager $wp_customize ) 
+{
 	$wp_customize->add_section( 'heading_gradient_section' , array(
 		'title'       => __( 'Heading Color Gradient', ' ' ),
 		'priority'    => 30,
@@ -114,10 +101,8 @@ function reactverse_gradient_body ( WP_Customize_Manager $wp_customize ) {
 }
 add_action( 'customize_register', 'reactverse_gradient_body' );
 
-/*
-* Adding placeholder media uploader
-*/
-function reactverse_post_image_placeholder ( WP_Customize_Manager $wp_customize ) {
+function reactverse_post_image_placeholder ( WP_Customize_Manager $wp_customize ) 
+{
 	$wp_customize->add_section( 'post_image_placeholder_section' , array(
 		'title'       => __( 'Post Image Placeholder', ' ' ),
 		'priority'    => 30,
@@ -125,7 +110,6 @@ function reactverse_post_image_placeholder ( WP_Customize_Manager $wp_customize 
 	) );
 
 	$wp_customize->add_setting( 'placeholder_image_url', array() );
-
 	$wp_customize->add_control (
 		new WP_Customize_Image_Control(
            $wp_customize,
@@ -138,13 +122,12 @@ function reactverse_post_image_placeholder ( WP_Customize_Manager $wp_customize 
        )
 	);
 
-
 	$wp_customize->get_setting( 'placeholder_image_url'  )->transport = 'postMessage';
 }
 add_action( 'customize_register', 'reactverse_post_image_placeholder' );
 
-/* For infinite scrolling */
-function reactverse_posts_infinite_scroll ( WP_Customize_Manager $wp_customize ) {
+function reactverse_posts_infinite_scroll ( WP_Customize_Manager $wp_customize ) 
+{
 	$wp_customize->add_section( 'posts_infinite_scroll_section' , array(
 		'title'       => __( 'Infinite Scrolling / Pagination'),
 		'priority'    => 30,
@@ -172,16 +155,12 @@ function reactverse_posts_infinite_scroll ( WP_Customize_Manager $wp_customize )
 }
 add_action( 'customize_register', 'reactverse_posts_infinite_scroll' );
 
-/**
- * Workaround issue in WP API Menus plugin to force nav menu item classes to be arrays instead of strings.
- *
- * @see \WP_REST_Menus::get_menu_location()
- *
- * @param array $items Nav menu items.
- */
-function _reactverse_filter_wp_api_nav_menu_items_workaround( $items ) {
-	foreach ( $items as &$item ) {
-		if ( is_string( $item->classes ) ) {
+function _reactverse_filter_wp_api_nav_menu_items_workaround( $items ) 
+{
+	foreach ( $items as &$item ) 
+	{
+		if ( is_string( $item->classes ) ) 
+		{
 			$item->classes = explode( ' ', $item->classes );
 		}
 	}

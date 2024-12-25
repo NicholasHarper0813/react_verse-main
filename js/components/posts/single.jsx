@@ -1,13 +1,7 @@
-/*global ReactVerseSettings */
-// External dependencies
 import React from 'react';
 import classNames from 'classnames';
 import { Link } from 'react-router';
-
-// Internal dependencies
 import ContentMixin from '../../utils/content-mixin';
-
-// Components
 import Media from '../post/image';
 
 let Post = React.createClass( {
@@ -17,7 +11,8 @@ let Post = React.createClass( {
 		let post = this.props;
 		let placeholderImage = this.props.placeholderImage
 
-		if ( 'attachment' === post.type ) {
+		if ( 'attachment' === post.type ) 
+		{
 			return null;
 		}
 
@@ -26,8 +21,6 @@ let Post = React.createClass( {
 		} );
 
 		let path = post.link.replace( ReactVerseSettings.URL.base, ReactVerseSettings.URL.path );
-
-
 		const featuredMedia = this.getFeaturedMedia( post );
 
 		return (

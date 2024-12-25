@@ -1,17 +1,12 @@
-/* global ReactVerseSettings */
 import React from 'react';
 import { connect } from 'react-redux';
+import { getPageIdFromPath, isRequestingPage, getPage } from 'wordpress-query-page/lib/selectors';
 import classNames from 'classnames';
 import DocumentMeta from 'react-document-meta';
 import BodyClass from 'react-body-class';
 import he from 'he';
-
-// Internal dependencies
 import QueryPage from 'wordpress-query-page';
-import { getPageIdFromPath, isRequestingPage, getPage } from 'wordpress-query-page/lib/selectors';
 import ContentMixin from '../../utils/content-mixin';
-
-// Components
 import Media from './image';
 import Comments from '../comments';
 import Placeholder from '../placeholder';
@@ -22,21 +17,24 @@ import ContactPage from '../templates/contact-page';
 const SinglePage = React.createClass( {
 	mixins: [ ContentMixin ],
 
-	renderArticle() {
+	renderArticle() 
+	{
 		const post = this.props.post;
 
-		if ( ! post ) {
+		if ( ! post ) 
+		{
 			return null;
 		}
 
 		const template = post.template.split('.')[0];
-		if ( template == 'front-page' ) {
+		if ( template == 'front-page' ) 
+		{
 			return <FrontPage post={ post }/>
-		} else
-		if ( template == 'contact-page' ) {
+		} 
+		else if ( template == 'contact-page' ) 
+		{
 			return <ContactPage post={ post }/>
 		}
-
 
 		const meta = {
 			title: post.title.rendered + ' – ' + ReactVerseSettings.meta.title,
@@ -65,9 +63,11 @@ const SinglePage = React.createClass( {
 		);
 	},
 
-	renderComments() {
+	renderComments() 
+	{
 		const post = this.props.post;
-		if ( ! post ) {
+		if ( ! post ) 
+		{
 			return null;
 		}
 
@@ -103,14 +103,14 @@ const SinglePage = React.createClass( {
 
 export default connect( ( state, ownProps ) => {
 	let path = ownProps.params.splat || ownProps.route.slug;
-	if ( '/' === path[ path.length - 1 ] ) {
+	if ( '/' === path[ path.length - 1 ] ) 
+	{
 		path = path.slice( 0, -1 );
 	}
 
 	const postId = getPageIdFromPath( state, path );
 	const requesting = isRequestingPage( state, path );
 	const post = getPage( state, parseInt( postId ) );
-
 	const previewId = ownProps.location.query.preview_id;
 
 	return {
